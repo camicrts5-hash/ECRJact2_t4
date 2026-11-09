@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Productos</title>
+</head>
+<body>
+    <!-- Aquí mostramos el @Value -->
+    <h1 th:text="${nombreApp}">Nombre App</h1> 
+    
+    <h2>Lista de Productos</h2>
+    <table border="1">
+        <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Categoría</th>
+            <th>Detalle</th>
+        </tr>
+        <!-- Aquí usamos th:each -->
+        <tr th:each="producto, iterStat : ${productos}">
+            <td th:text="${producto.nombre}">Nombre</td>
+            <td th:text="${producto.precio}">Precio</td>
+            <td th:text="${producto.categoria}">Categoría</td>
+            <td><a th:href="@{/tienda/productos/{id}(id=${iterStat.index})}">Ver Detalle</a></td>
+        </tr>
+    </table>
+
+    <!-- Aquí probamos @RequestParam -->
+    <h3>Filtrar por categoría:</h3>
+    <a th:href="@{/tienda/filtrar(categoria='Electrónica')}">Ver Electrónica</a> | 
+    <a th:href="@{/tienda/filtrar(categoria='Muebles')}">Ver Muebles</a> | 
+    <a th:href="@{/tienda/productos}">Ver Todos</a>
+
+    <br><br>
+    <a th:href="@{/tienda/formulario}">Agregar Producto (Formulario)</a>
+</body>
+</html>
